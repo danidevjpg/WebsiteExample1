@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+
+@theme{
+  --font-main: 'Lato', sans-serif;
+  --color-softprimary: #84D187;
+  --color-primary: #00B207;
+  --color-hardprimary: ##2C742F;
+  --color-warning: #FF8A00;
+  --color-danger: ##EA4B48;
+  --color-white: #FFFFFF;
+}
+
+html{
+  font-family: 'lato', sans-serif;
+}
