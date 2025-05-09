@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { CiLocationOn, CiHeart } from "react-icons/ci";
 import { PiShoppingBagLight } from "react-icons/pi";
-import { FiMenu, FiUser } from "react-icons/fi";
+import { FiMenu, FiUser, FiPhone, FiX } from "react-icons/fi";
 
 function SecondaryNavBar() {
   const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
@@ -28,7 +28,7 @@ function SecondaryNavBar() {
         <div className="relative">
           <button
             onClick={toggleHomeDropdown}
-            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white"
+            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white hover:text-gray-200 transition-colors duration-200"
           >
             <span>Home</span>
             <svg
@@ -46,15 +46,15 @@ function SecondaryNavBar() {
             </svg>
           </button>
           <div
-            className={`mt-1 w-full rounded-md shadow-lg bg-gray-700 ring-1 ring-gray-600 ring-opacity-50 ${
+            className={`mt-1 w-full rounded-lg bg-gray-800/90 backdrop-blur-sm ring-1 ring-gray-600/50 ${
               isHomeDropdownOpen ? "block" : "hidden"
-            }`}
+            } transition-all duration-200 ease-in-out`}
           >
             <div className="py-1">
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
                 Main Home
               </button>
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
                 Minimal Home
               </button>
             </div>
@@ -64,7 +64,7 @@ function SecondaryNavBar() {
         <div className="relative">
           <button
             onClick={toggleShopDropdown}
-            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white"
+            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white hover:text-gray-200 transition-colors duration-200"
           >
             <span>Shop</span>
             <svg
@@ -82,15 +82,15 @@ function SecondaryNavBar() {
             </svg>
           </button>
           <div
-            className={`mt-1 w-full rounded-md shadow-lg bg-gray-700 ring-1 ring-gray-600 ring-opacity-50 ${
+            className={`mt-1 w-full rounded-lg bg-gray-800/90 backdrop-blur-sm ring-1 ring-gray-600/50 ${
               isShopDropdownOpen ? "block" : "hidden"
-            }`}
+            } transition-all duration-200 ease-in-out`}
           >
             <div className="py-1">
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
                 Shop Grid
               </button>
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
                 Shop List
               </button>
             </div>
@@ -100,7 +100,7 @@ function SecondaryNavBar() {
         <div className="relative">
           <button
             onClick={togglePagesDropdown}
-            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white"
+            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white hover:text-gray-200 transition-colors duration-200"
           >
             <span>Pages</span>
             <svg
@@ -118,32 +118,32 @@ function SecondaryNavBar() {
             </svg>
           </button>
           <div
-            className={`mt-1 w-full rounded-md shadow-lg bg-gray-700 ring-1 ring-gray-600 ring-opacity-50 ${
+            className={`mt-1 w-full rounded-lg bg-gray-800/90 backdrop-blur-sm ring-1 ring-gray-600/50 ${
               isPagesDropdownOpen ? "block" : "hidden"
-            }`}
+            } transition-all duration-200 ease-in-out`}
           >
             <div className="py-1">
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
                 FAQ
               </button>
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
                 Privacy Policy
               </button>
             </div>
           </div>
         </div>
         {/* About Us */}
-        <button className="w-full text-left py-2 text-sm text-white hover:text-gray-300 cursor-pointer">
+        <button className="w-full text-left py-2 text-sm text-white hover:text-gray-200 cursor-pointer transition-colors duration-200">
           About Us
         </button>
         {/* Contact Us */}
-        <button className="w-full text-left py-2 text-sm text-white hover:text-gray-300 cursor-pointer">
+        <button className="w-full text-left py-2 text-sm text-white hover:text-gray-200 cursor-pointer transition-colors duration-200">
           Contact Us
         </button>
       </div>
 
       {/* Desktop Secondary Navbar */}
-      <div className="hidden sm:block bg-white border-b border-gray-300">
+      <div className="hidden sm:block bg-gray-800 border-b border-gray-300 text-gray-300">
         <div className="flex justify-center items-center p-4">
           <div className="flex space-x-8">
             {/* Home Dropdown */}
@@ -235,8 +235,7 @@ function SecondaryNavBar() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M19 9l-7 7-7-7"
-                  />
+                    d="M19 9l-7 7-7-7 trombosis"/>
                 </svg>
               </button>
               <div
@@ -335,7 +334,7 @@ function NavBar() {
         <div className="sm:hidden fixed top-4 left-4 z-50">
           <button
             onClick={toggleSidebar}
-            className="text-gray-500 hover:text-gray-700"
+            className="text-gray-500 hover:text-gray-700 p-2 rounded-full bg-white/80 backdrop-blur-sm shadow-md transition-transform hover:scale-105"
           >
             <FiMenu className="w-6 h-6" />
           </button>
@@ -345,43 +344,60 @@ function NavBar() {
       {/* Mobile Sidebar */}
       <div
         ref={sidebarRef}
-        className={`sm:hidden fixed top-0 left-0 h-full w-64 bg-gray-800 text-white transform ${
+        className={`sm:hidden fixed top-0 left-0 h-full w-80 bg-gray-900/95 backdrop-blur-md transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out z-40 p-4 flex flex-col space-y-4`}
+        } transition-transform duration-300 ease-in-out z-50 p-6 flex flex-col space-y-6 shadow-2xl rounded-r-2xl`}
       >
-        {/* Sign In (User Icon), Heart, Shopping Bag */}
-        <div className="flex justify-between items-center mb-4">
-          <button className="text-white hover:text-gray-300 cursor-pointer py-2">
-            <FiUser className="w-6 h-6" />
+        {/* Header: Close Button and User Icon */}
+        <div className="flex justify-between items-center">
+          <button
+            onClick={toggleSidebar}
+            className="text-white hover:text-gray-300 p-2 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-transform hover:scale-105"
+          >
+            <FiX className="w-6 h-6" />
           </button>
-          <button className="cursor-pointer">
-            <CiHeart className="w-6 h-6 text-white hover:text-gray-300" />
-          </button>
-          <button className="relative cursor-pointer">
-            <PiShoppingBagLight className="w-6 h-6 text-white hover:text-gray-300" />
-            <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
-              3
-            </span>
-          </button>
+          <div className="flex space-x-2">
+            <button className="text-white hover:text-gray-300 p-2 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-transform hover:scale-105">
+              <FiUser className="w-6 h-6" />
+            </button>
+            <button className="text-white hover:text-gray-300 p-2 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-transform hover:scale-105">
+              <CiHeart className="w-6 h-6" />
+            </button>
+            <button className="relative text-white hover:text-gray-300 p-2 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-transform hover:scale-105">
+              <PiShoppingBagLight className="w-6 h-6" />
+              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
+                3
+              </span>
+            </button>
+          </div>
         </div>
+
         {/* Search */}
         <div className="w-full">
-          <div className="flex items-center border border-gray-500 rounded-md overflow-hidden">
+          <div className="flex items-center border border-gray-600/50 rounded-xl bg-gray-800/50 backdrop-blur-sm overflow-hidden">
             <input
               type="text"
               placeholder="Search..."
-              className="flex-grow py-2 px-3 text-sm text-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="flex-grow py-3 px-4 text-sm text-gray-200 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded-l-xl"
             />
-            <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-3 text-sm">
+            <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-3 px-4 rounded-r-xl text-sm transition-all duration-200">
               Search
             </button>
           </div>
         </div>
-        {/* Combined Settings Dropdown */}
+
+        {/* Navigation */}
+        <div className="flex flex-col space-y-2">
+          <h3 className="text-xs text-gray-400 uppercase tracking-wider mb-2">Navigation</h3>
+          <SecondaryNavBar />
+        </div>
+
+        {/* Settings Dropdown */}
         <div className="relative">
+          <h3 className="text-xs text-gray-400 uppercase tracking-wider mb-2">Settings</h3>
           <button
             onClick={handleSettingsDropdownToggle}
-            className="py-2 inline-flex items-center cursor-pointer text-sm text-white"
+            className="w-full text-left py-3 inline-flex items-center cursor-pointer text-sm text-white hover:text-gray-200 transition-colors duration-200"
           >
             <span>Settings</span>
             <svg
@@ -399,80 +415,90 @@ function NavBar() {
             </svg>
           </button>
           <div
-            className={`mt-2 w-full rounded-md shadow-lg bg-gray-700 ring-1 ring-gray-600 ring-opacity-50 ${
+            className={`mt-2 w-full rounded-lg bg-gray-800/90 backdrop-blur-sm ring-1 ring-gray-600/50 ${
               isSettingsDropdownOpen ? "block" : "hidden"
-            }`}
+            } transition-all duration-200 ease-in-out`}
           >
             <div className="py-1">
               <div className="px-4 py-2 text-xs text-gray-400">Location</div>
               <button
                 onClick={() => handleOptionClick("location", "New York")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
               >
                 New York {selectedLocation === "New York" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("location", "Los Angeles")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
               >
                 Los Angeles {selectedLocation === "Los Angeles" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("location", "Chicago")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
               >
                 Chicago {selectedLocation === "Chicago" && "✓"}
               </button>
-              <div className="border-t border-gray-600 my-2"></div>
+              <div className="border-t border-gray-600/50 my-2"></div>
               <div className="px-4 py-2 text-xs text-gray-400">Currency</div>
               <button
                 onClick={() => handleOptionClick("currency", "USD")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
               >
                 USD {selectedCurrency === "USD" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("currency", "EUR")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
               >
                 EUR {selectedCurrency === "EUR" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("currency", "GBP")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
               >
                 GBP {selectedCurrency === "GBP" && "✓"}
               </button>
-              <div className="border-t border-gray-600 my-2"></div>
+              <div className="border-t border-gray-600/50 my-2"></div>
               <div className="px-4 py-2 text-xs text-gray-400">Language</div>
               <button
                 onClick={() => handleOptionClick("language", "English")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
               >
                 English {selectedLanguage === "English" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("language", "Spanish")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
               >
                 Spanish {selectedLanguage === "Spanish" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("language", "French")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
               >
                 French {selectedLanguage === "French" && "✓"}
               </button>
             </div>
           </div>
         </div>
-        {/* Secondary Navbar (Mobile) */}
-        <SecondaryNavBar />
+
+        {/* Support Phone Number */}
+        <div className="mt-auto">
+          <a
+            href="tel:+1-800-555-1234"
+            className="flex items-center text-sm text-white hover:text-gray-200 relative group"
+          >
+            <FiPhone className="w-5 h-5 mr-2" />
+            +1-800-555-1234
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-500 to-green-600 group-hover:w-full transition-all duration-300"></span>
+          </a>
+        </div>
       </div>
 
       {/* Desktop Navbar */}
       <div className="hidden sm:block">
-        {/* Top Navbar: Location, Currency, Language, Sign In/Sign Up */}
+        {/* Top Navbar: Location, Currency, Language, Sign In/Sign Up, Support Phone */}
         <div
           id="navbar-top"
           className="flex flex-col sm:flex-row justify-between items-center p-4 border-b border-gray-300 text-xs text-gray-500"
@@ -630,10 +656,17 @@ function NavBar() {
               </div>
             </div>
           </div>
-          {/* Sign In / Sign Up */}
+          {/* Sign In / Sign Up / Support Phone */}
           <div className="flex space-x-4 items-center mr-4 md:mr-24">
             <button className="cursor-pointer">Sign In</button>
             <button className="cursor-pointer">Sign Up</button>
+            <a
+              href="tel:+1-800-555-1234"
+              className="flex items-center cursor-pointer"
+            >
+              <FiPhone className="w-4 h-4 mr-1" />
+              +1-800-555-1234
+            </a>
           </div>
         </div>
         {/* Main Navbar: Logo, Search, Heart, Shopping Bag */}
@@ -647,7 +680,7 @@ function NavBar() {
           </div>
           {/* Search */}
           <div className="w-full sm:flex-grow sm:max-w-md mx-4 mb-2 sm:mb-0">
-            <div className="flex items-center border border-gray-300 rounded-md">
+            <div className="flex items-center border border-gray-300 Rounded-md">
               <input
                 type="text"
                 placeholder="Search..."
