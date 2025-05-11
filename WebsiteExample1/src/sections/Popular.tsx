@@ -48,4 +48,4 @@ function PopularItems() {
   );
 }
 
-export { PopularItems };
+export default PopularItems;

@@ -1,7 +1,7 @@
 import './App.css'
 import NavBar from './components/NavBar'
 import HeroSection from './sections/Hero'
-import { PopularCategories } from './sections/Popular'
+import  PopularItems  from './sections/Popular'
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <>
     <NavBar/>
     <HeroSection/>
-    <PopularCategories/>
+    <PopularItems/>
     </>
   )
 }
