@@ -1,13 +1,16 @@
 import './App.css'
 import NavBar from './components/NavBar'
-import {HeroSection, HeroSectionUnderBar} from './sections/Hero'
+import HeroSection from './sections/Hero'
+import { PopularCategories } from './sections/Popular'
+
+
 function App() {
 
   return (
     <>
     <NavBar/>
     <HeroSection/>
-    <HeroSectionUnderBar/>
+    <PopularCategories/>
     </>
   )
 }
