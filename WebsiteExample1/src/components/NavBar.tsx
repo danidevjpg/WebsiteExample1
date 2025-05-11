@@ -1,25 +1,33 @@
-import { useState, useEffect, useRef } from "react";
-import { CiLocationOn, CiHeart } from "react-icons/ci";
+import { createContext, useState, useEffect, useRef } from "react";
+import { CiLocationOn, CiHeart, CiSun } from "react-icons/ci";
+import { FaMoon } from "react-icons/fa";
 import { PiShoppingBagLight } from "react-icons/pi";
 import { FiMenu, FiUser, FiPhone, FiX } from "react-icons/fi";
 
-function SecondaryNavBar() {
-  const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
-  const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false);
-  const [isPagesDropdownOpen, setIsPagesDropdownOpen] = useState(false);
+// Theme Context
+const ThemeContext = createContext<{ theme: string; toggleTheme: () => void }>({
+  theme: "light",
+  toggleTheme: () => {},
+});
 
-  const toggleHomeDropdown = () => {
-    setIsHomeDropdownOpen(!isHomeDropdownOpen);
-  };
-
-  const toggleShopDropdown = () => {
-    setIsShopDropdownOpen(!isShopDropdownOpen);
-  };
-
-  const togglePagesDropdown = () => {
-    setIsPagesDropdownOpen(!isPagesDropdownOpen);
-  };
-
+// Reusable Dropdown Component
+function Dropdown({
+  label,
+  items,
+  isOpen,
+  toggle,
+  onSelect,
+  type,
+  selected,
+}: {
+  label: string;
+  items: string[];
+  isOpen: boolean;
+  toggle: () => void;
+  onSelect: (type: string, value: string) => void;
+  type: string;
+  selected?: string;
+}) {
   return (
     <>
       {/* Mobile Secondary Navbar (Integrated into Sidebar) */}
@@ -28,7 +36,7 @@ function SecondaryNavBar() {
         <div className="relative">
           <button
             onClick={toggleHomeDropdown}
-            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white hover:text-gray-200 transition-colors duration-200"
+            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white"
           >
             <span>Home</span>
             <svg
@@ -46,15 +54,15 @@ function SecondaryNavBar() {
             </svg>
           </button>
           <div
-            className={`mt-1 w-full rounded-lg bg-gray-800/90 backdrop-blur-sm ring-1 ring-gray-600/50 ${
+            className={`mt-1 w-full rounded-md shadow-lg bg-gray-700 ring-1 ring-gray-600 ring-opacity-50 ${
               isHomeDropdownOpen ? "block" : "hidden"
-            } transition-all duration-200 ease-in-out`}
+            }`}
           >
             <div className="py-1">
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
                 Main Home
               </button>
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
                 Minimal Home
               </button>
             </div>
@@ -64,7 +72,7 @@ function SecondaryNavBar() {
         <div className="relative">
           <button
             onClick={toggleShopDropdown}
-            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white hover:text-gray-200 transition-colors duration-200"
+            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white"
           >
             <span>Shop</span>
             <svg
@@ -82,15 +90,15 @@ function SecondaryNavBar() {
             </svg>
           </button>
           <div
-            className={`mt-1 w-full rounded-lg bg-gray-800/90 backdrop-blur-sm ring-1 ring-gray-600/50 ${
+            className={`mt-1 w-full rounded-md shadow-lg bg-gray-700 ring-1 ring-gray-600 ring-opacity-50 ${
               isShopDropdownOpen ? "block" : "hidden"
-            } transition-all duration-200 ease-in-out`}
+            }`}
           >
             <div className="py-1">
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
                 Shop Grid
               </button>
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
                 Shop List
               </button>
             </div>
@@ -100,7 +108,7 @@ function SecondaryNavBar() {
         <div className="relative">
           <button
             onClick={togglePagesDropdown}
-            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white hover:text-gray-200 transition-colors duration-200"
+            className="w-full text-left py-2 inline-flex items-center cursor-pointer text-sm text-white"
           >
             <span>Pages</span>
             <svg
@@ -118,32 +126,32 @@ function SecondaryNavBar() {
             </svg>
           </button>
           <div
-            className={`mt-1 w-full rounded-lg bg-gray-800/90 backdrop-blur-sm ring-1 ring-gray-600/50 ${
+            className={`mt-1 w-full rounded-md shadow-lg bg-gray-700 ring-1 ring-gray-600 ring-opacity-50 ${
               isPagesDropdownOpen ? "block" : "hidden"
-            } transition-all duration-200 ease-in-out`}
+            }`}
           >
             <div className="py-1">
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
                 FAQ
               </button>
-              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150">
+              <button className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer">
                 Privacy Policy
               </button>
             </div>
           </div>
         </div>
         {/* About Us */}
-        <button className="w-full text-left py-2 text-sm text-white hover:text-gray-200 cursor-pointer transition-colors duration-200">
+        <button className="w-full text-left py-2 text-sm text-white hover:text-gray-300 cursor-pointer">
           About Us
         </button>
         {/* Contact Us */}
-        <button className="w-full text-left py-2 text-sm text-white hover:text-gray-200 cursor-pointer transition-colors duration-200">
+        <button className="w-full text-left py-2 text-sm text-white hover:text-gray-300 cursor-pointer">
           Contact Us
         </button>
       </div>
 
       {/* Desktop Secondary Navbar */}
-      <div className="hidden sm:block bg-gray-800 border-b border-gray-300 text-gray-300">
+      <div className="hidden sm:block bg-white border-b border-gray-300">
         <div className="flex justify-center items-center p-4">
           <div className="flex space-x-8">
             {/* Home Dropdown */}
@@ -235,7 +243,8 @@ function SecondaryNavBar() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
-                    d="M19 9l-7 7-7-7 trombosis"/>
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </button>
               <div
@@ -269,45 +278,39 @@ function SecondaryNavBar() {
 }
 
 function NavBar() {
-  const [isSettingsDropdownOpen, setIsSettingsDropdownOpen] = useState(false);
-  const [isLocationDropdownOpen, setIsLocationDropdownOpen] = useState(false);
-  const [isCurrencyDropdownOpen, setIsCurrencyDropdownOpen] = useState(false);
-  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
-  const [selectedLocation, setSelectedLocation] = useState("Select Location");
-  const [selectedCurrency, setSelectedCurrency] = useState("Select Currency");
-  const [selectedLanguage, setSelectedLanguage] = useState("Select Language");
+  const [dropdowns, setDropdowns] = useState({
+    settings: false,
+    location: false,
+    currency: false,
+    language: false,
+  });
+  const [selections, setSelections] = useState({
+    location: "Select Location",
+    currency: "Select Currency",
+    language: "Select Language",
+  });
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
   const sidebarRef = useRef<HTMLDivElement>(null);
 
-  const handleSettingsDropdownToggle = () => {
-    setIsSettingsDropdownOpen(!isSettingsDropdownOpen);
+  // Theme management
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((prev) => (prev === "light" ? "dark" : "light"));
+
+  const toggleDropdown = (key: keyof typeof dropdowns) => {
+    setDropdowns((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const handleLocationDropdownToggle = () => {
-    setIsLocationDropdownOpen(!isLocationDropdownOpen);
+  const handleOptionClick = (type: string, value: string) => {
+    setSelections((prev) => ({ ...prev, [type]: value }));
+    setDropdowns({ settings: false, location: false, currency: false, language: false });
   };
 
-  const handleCurrencyDropdownToggle = () => {
-    setIsCurrencyDropdownOpen(!isCurrencyDropdownOpen);
-  };
-
-  const handleLanguageDropdownToggle = () => {
-    setIsLanguageDropdownOpen(!isLanguageDropdownOpen);
-  };
-
-  const handleOptionClick = (type: "location" | "currency" | "language", value: string) => {
-    if (type === "location") setSelectedLocation(value);
-    if (type === "currency") setSelectedCurrency(value);
-    if (type === "language") setSelectedLanguage(value);
-    setIsSettingsDropdownOpen(false);
-    setIsLocationDropdownOpen(false);
-    setIsCurrencyDropdownOpen(false);
-    setIsLanguageDropdownOpen(false);
-  };
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
   // Close sidebar on click outside
   useEffect(() => {
@@ -322,9 +325,7 @@ function NavBar() {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isSidebarOpen]);
 
   return (
@@ -334,7 +335,7 @@ function NavBar() {
         <div className="sm:hidden fixed top-4 left-4 z-50">
           <button
             onClick={toggleSidebar}
-            className="text-gray-500 hover:text-gray-700 p-2 rounded-full bg-white/80 backdrop-blur-sm shadow-md transition-transform hover:scale-105"
+            className="text-gray-500 hover:text-gray-700"
           >
             <FiMenu className="w-6 h-6" />
           </button>
@@ -344,161 +345,131 @@ function NavBar() {
       {/* Mobile Sidebar */}
       <div
         ref={sidebarRef}
-        className={`sm:hidden fixed top-0 left-0 h-full w-80 bg-gray-900/95 backdrop-blur-md transform ${
+        className={`sm:hidden fixed top-0 left-0 h-full w-64 bg-gray-800 text-white transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out z-50 p-6 flex flex-col space-y-6 shadow-2xl rounded-r-2xl`}
+        } transition-transform duration-300 ease-in-out z-40 p-4 flex flex-col space-y-4`}
       >
-        {/* Header: Close Button and User Icon */}
-        <div className="flex justify-between items-center">
-          <button
-            onClick={toggleSidebar}
-            className="text-white hover:text-gray-300 p-2 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-transform hover:scale-105"
-          >
-            <FiX className="w-6 h-6" />
+        {/* Sign In (User Icon), Heart, Shopping Bag */}
+        <div className="flex justify-between items-center mb-4">
+          <button className="text-white hover:text-gray-300 cursor-pointer py-2">
+            <FiUser className="w-6 h-6" />
           </button>
-          <div className="flex space-x-2">
-            <button className="text-white hover:text-gray-300 p-2 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-transform hover:scale-105">
-              <FiUser className="w-6 h-6" />
-            </button>
-            <button className="text-white hover:text-gray-300 p-2 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-transform hover:scale-105">
-              <CiHeart className="w-6 h-6" />
-            </button>
-            <button className="relative text-white hover:text-gray-300 p-2 rounded-full bg-gray-800/50 hover:bg-gray-700/50 transition-transform hover:scale-105">
-              <PiShoppingBagLight className="w-6 h-6" />
-              <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
-                3
-              </span>
-            </button>
-          </div>
+          <button className="cursor-pointer">
+            <CiHeart className="w-6 h-6 text-white hover:text-gray-300" />
+          </button>
+          <button className="relative cursor-pointer">
+            <PiShoppingBagLight className="w-6 h-6 text-white hover:text-gray-300" />
+            <span className="absolute top-0 right-0 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
+              3
+            </span>
+          </button>
         </div>
-
         {/* Search */}
         <div className="w-full">
-          <div className="flex items-center border border-gray-600/50 rounded-xl bg-gray-800/50 backdrop-blur-sm overflow-hidden">
+          <div className="flex items-center border border-gray-500 rounded-md overflow-hidden">
             <input
               type="text"
               placeholder="Search..."
-              className="flex-grow py-3 px-4 text-sm text-gray-200 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded-l-xl"
+              className="flex-grow py-2 px-3 text-sm text-gray-300 bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold py-3 px-4 rounded-r-xl text-sm transition-all duration-200">
+            <button className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-3 text-sm">
               Search
             </button>
           </div>
         </div>
-
-        {/* Navigation */}
-        <div className="flex flex-col space-y-2">
-          <h3 className="text-xs text-gray-400 uppercase tracking-wider mb-2">Navigation</h3>
-          <SecondaryNavBar />
-        </div>
-
-        {/* Settings Dropdown */}
+        {/* Combined Settings Dropdown */}
         <div className="relative">
-          <h3 className="text-xs text-gray-400 uppercase tracking-wider mb-2">Settings</h3>
           <button
             onClick={handleSettingsDropdownToggle}
-            className="w-full text-left py-3 inline-flex items-center cursor-pointer text-sm text-white hover:text-gray-200 transition-colors duration-200"
+            className="py-2 inline-flex items-center cursor-pointer text-sm text-white"
           >
-            <span>Settings</span>
-            <svg
-              className="w-3 h-3 ml-1 mt-0.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
+            {theme === "light" ? (
+              <>
+                <FaMoon className="w-5 h-5 mr-2" />
+                Dark Mode
+              </>
+            ) : (
+              <>
+                <CiSun className="w-5 h-5 mr-2" />
+                Light Mode
+              </>
+            )}
           </button>
           <div
-            className={`mt-2 w-full rounded-lg bg-gray-800/90 backdrop-blur-sm ring-1 ring-gray-600/50 ${
+            className={`mt-2 w-full rounded-md shadow-lg bg-gray-700 ring-1 ring-gray-600 ring-opacity-50 ${
               isSettingsDropdownOpen ? "block" : "hidden"
-            } transition-all duration-200 ease-in-out`}
+            }`}
           >
             <div className="py-1">
               <div className="px-4 py-2 text-xs text-gray-400">Location</div>
               <button
                 onClick={() => handleOptionClick("location", "New York")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
               >
                 New York {selectedLocation === "New York" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("location", "Los Angeles")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
               >
                 Los Angeles {selectedLocation === "Los Angeles" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("location", "Chicago")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
               >
                 Chicago {selectedLocation === "Chicago" && "✓"}
               </button>
-              <div className="border-t border-gray-600/50 my-2"></div>
+              <div className="border-t border-gray-600 my-2"></div>
               <div className="px-4 py-2 text-xs text-gray-400">Currency</div>
               <button
                 onClick={() => handleOptionClick("currency", "USD")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
               >
                 USD {selectedCurrency === "USD" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("currency", "EUR")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
               >
                 EUR {selectedCurrency === "EUR" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("currency", "GBP")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
               >
                 GBP {selectedCurrency === "GBP" && "✓"}
               </button>
-              <div className="border-t border-gray-600/50 my-2"></div>
+              <div className="border-t border-gray-600 my-2"></div>
               <div className="px-4 py-2 text-xs text-gray-400">Language</div>
               <button
                 onClick={() => handleOptionClick("language", "English")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
               >
                 English {selectedLanguage === "English" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("language", "Spanish")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
               >
                 Spanish {selectedLanguage === "Spanish" && "✓"}
               </button>
               <button
                 onClick={() => handleOptionClick("language", "French")}
-                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-700/80 hover:text-white cursor-pointer transition-colors duration-150"
+                className="block w-full text-left px-4 py-2 text-sm text-gray-300 hover:bg-gray-600 cursor-pointer"
               >
                 French {selectedLanguage === "French" && "✓"}
               </button>
             </div>
           </div>
         </div>
-
-        {/* Support Phone Number */}
-        <div className="mt-auto">
-          <a
-            href="tel:+1-800-555-1234"
-            className="flex items-center text-sm text-white hover:text-gray-200 relative group"
-          >
-            <FiPhone className="w-5 h-5 mr-2" />
-            +1-800-555-1234
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-green-500 to-green-600 group-hover:w-full transition-all duration-300"></span>
-          </a>
-        </div>
+        {/* Secondary Navbar (Mobile) */}
+        <SecondaryNavBar />
       </div>
 
       {/* Desktop Navbar */}
       <div className="hidden sm:block">
-        {/* Top Navbar: Location, Currency, Language, Sign In/Sign Up, Support Phone */}
+        {/* Top Navbar: Location, Currency, Language, Sign In/Sign Up */}
         <div
           id="navbar-top"
           className="flex flex-col sm:flex-row justify-between items-center p-4 border-b border-gray-300 text-xs text-gray-500"
@@ -508,165 +479,56 @@ function NavBar() {
             <div className="flex items-center">
               <span>
                 <CiLocationOn className="w-4 h-4" />
-              </span>
-              {/* Location drop down */}
-              <div className="relative inline-block text-left ml-1">
-                <span className="text-gray-500 mr-2">Store Location:</span>
-                <button
-                  onClick={handleLocationDropdownToggle}
-                  className="py-2 inline-flex items-center cursor-pointer"
-                >
-                  <span>{selectedLocation}</span>
-                  <svg
-                    className="w-3 h-3 ml-1 mt-0.9"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </button>
-                <div
-                  className={`origin-top-right absolute left-0 mt-2 w-40 sm:w-48 rounded-md shadow-lg bg-white ring-1 ring-gray-400 ring-opacity-1 ${
-                    isLocationDropdownOpen ? "block" : "hidden"
-                  }`}
-                >
-                  <div className="py-1">
-                    <button
-                      onClick={() => handleOptionClick("location", "New York")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                    >
-                      New York
-                    </button>
-                    <button
-                      onClick={() => handleOptionClick("location", "Los Angeles")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                    >
-                      Los Angeles
-                    </button>
-                    <button
-                      onClick={() => handleOptionClick("location", "Chicago")}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                    >
-                      Chicago
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* Currency drop down */}
-            <div className="relative inline-block text-left">
-              <button
-                onClick={handleCurrencyDropdownToggle}
-                className="py-2 inline-flex items-center cursor-pointer"
-              >
-                <span>{selectedCurrency}</span>
-                <svg
-                  className="w-3 h-3 ml-1 mt-0.9"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19 9l-7 7-7-7"
+                <div className="ml-1">
+                  <Dropdown
+                    label={selections.location}
+                    items={["New York", "Los Angeles", "Chicago"]}
+                    isOpen={dropdowns.location}
+                    toggle={() => toggleDropdown("location")}
+                    onSelect={handleOptionClick}
+                    type="location"
+                    selected={selections.location}
                   />
-                </svg>
-              </button>
-              <div
-                className={`origin-top-right absolute left-0 mt-2 w-40 sm:w-48 rounded-md shadow-lg bg-white ring-1 ring-gray-400 ring-opacity-1 ${
-                  isCurrencyDropdownOpen ? "block" : "hidden"
-                }`}
-              >
-                <div className="py-1">
-                  <button
-                    onClick={() => handleOptionClick("currency", "USD")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  >
-                    USD
-                  </button>
-                  <button
-                    onClick={() => handleOptionClick("currency", "EUR")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  >
-                    EUR
-                  </button>
-                  <button
-                    onClick={() => handleOptionClick("currency", "GBP")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  >
-                    GBP
-                  </button>
                 </div>
               </div>
+              <Dropdown
+                label={selections.currency}
+                items={["USD", "EUR", "GBP"]}
+                isOpen={dropdowns.currency}
+                toggle={() => toggleDropdown("currency")}
+                onSelect={handleOptionClick}
+                type="currency"
+                selected={selections.currency}
+              />
+              <Dropdown
+                label={selections.language}
+                items={["English", "Spanish", "French"]}
+                isOpen={dropdowns.language}
+                toggle={() => toggleDropdown("language")}
+                onSelect={handleOptionClick}
+                type="language"
+                selected={selections.language}
+              />
             </div>
-            {/* Language drop down */}
-            <div className="relative inline-block text-left">
-              <button
-                onClick={handleLanguageDropdownToggle}
-                className="py-2 inline-flex items-center cursor-pointer"
-              >
-                <span>{selectedLanguage}</span>
-                <svg
-                  className="w-3 h-3 ml-1 mt-0.9"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
+            <div className="flex space-x-4 items-center mr-4 md:mr-24">
+              <button className="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100">
+                Sign In
               </button>
-              <div
-                className={`origin-top-right absolute left-0 mt-2 w-40 sm:w-48 rounded-md shadow-lg bg-white ring-1 ring-gray-400 ring-opacity-1 ${
-                  isLanguageDropdownOpen ? "block" : "hidden"
-                }`}
+              <button className="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100">
+                Sign Up
+              </button>
+              <button
+                onClick={toggleTheme}
+                className="text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100"
               >
-                <div className="py-1">
-                  <button
-                    onClick={() => handleOptionClick("language", "English")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  >
-                    English
-                  </button>
-                  <button
-                    onClick={() => handleOptionClick("language", "Spanish")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  >
-                    Spanish
-                  </button>
-                  <button
-                    onClick={() => handleOptionClick("language", "French")}
-                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                  >
-                    French
-                  </button>
-                </div>
-              </div>
+                {theme === "light" ? <FaMoon className="w-5 h-5" /> : <CiSun className="w-5 h-5" />}
+              </button>
             </div>
           </div>
-          {/* Sign In / Sign Up / Support Phone */}
+          {/* Sign In / Sign Up */}
           <div className="flex space-x-4 items-center mr-4 md:mr-24">
             <button className="cursor-pointer">Sign In</button>
             <button className="cursor-pointer">Sign Up</button>
-            <a
-              href="tel:+1-800-555-1234"
-              className="flex items-center cursor-pointer"
-            >
-              <FiPhone className="w-4 h-4 mr-1" />
-              +1-800-555-1234
-            </a>
           </div>
         </div>
         {/* Main Navbar: Logo, Search, Heart, Shopping Bag */}
@@ -680,7 +542,7 @@ function NavBar() {
           </div>
           {/* Search */}
           <div className="w-full sm:flex-grow sm:max-w-md mx-4 mb-2 sm:mb-0">
-            <div className="flex items-center border border-gray-300 Rounded-md">
+            <div className="flex items-center border border-gray-300 rounded-md">
               <input
                 type="text"
                 placeholder="Search..."
@@ -719,4 +581,5 @@ function App() {
   );
 }
 
-export default App;
+
+export default NavBar;
